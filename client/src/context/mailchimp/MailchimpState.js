@@ -4,7 +4,8 @@ import MailchimpContext from './mailchimpContext';
 import MailchimpReducer from './mailchimpReducer';
 import {
   GET_REPORTS,
-  SET_LOADING /*, REPORTS_ERROR */,
+  SET_LOADING,
+  REPORTS_ERROR,
   GET_SPECIFIC
 } from '../types';
 
@@ -20,7 +21,7 @@ const MailchimpState = props => {
 
   // Get Reports
   const getReports = async () => {
-    setLoading();
+    setLoading(true);
 
     const res = await axios.get('http://localhost:5000/api/reports');
 
@@ -30,35 +31,35 @@ const MailchimpState = props => {
     });
   };
 
+  // const getSpecific = async () => {
+  //   setLoading();
+
+  //   const res = await axios.get('http://localhost:5000/api/specific');
+
+  //   dispatch({
+  //     type: GET_SPECIFIC,
+  //     payload: res.data
+  //   });
+  // };
+
+  // get specific
   const getSpecific = async () => {
     setLoading();
 
-    const res = await axios.get('http://localhost:5000/api/specific');
+    try {
+      const res = await axios.get('http://localhost:5000/api/specific');
 
-    dispatch({
-      type: GET_SPECIFIC,
-      payload: res.data
-    });
+      dispatch({
+        type: GET_SPECIFIC,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: REPORTS_ERROR,
+        payload: 'There was an error'
+      });
+    }
   };
-
-  // // get reports test
-  // const getReports = async () => {
-  //   setLoading();
-
-  //   try {
-  //     const res = await axios.get([1, 2]);
-
-  //     dispatch({
-  //       type: GET_REPORTS,
-  //       payload: res.data
-  //     });
-  //   } catch (err) {
-  //     dispatch({
-  //       type: REPORTS_ERROR,
-  //       payload: 'There was an error'
-  //     });
-  //   }
-  // };
 
   // Set Loading
   const setLoading = () => dispatch({ type: SET_LOADING });
