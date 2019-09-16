@@ -26,11 +26,15 @@ const Reports = ({ match }) => {
     ? reports.reports[0].subject_line
     : 'could not pull subject';
 
+  const reportsForMap = reports.reports
+    ? reports.reports
+    : 'could not pull subject';
+
+  const reportSubjects = reportsForMap.map(repSub => repSub.subject_line);
+
   const totes = specific.clicks
     ? specific.clicks.clicks_total
     : 'could not pull total clicks';
-
-  // const reports2 = reports.reports;
 
   if (loading) return <Spinner />;
   return (
@@ -98,12 +102,10 @@ const Reports = ({ match }) => {
         <div>These are the Reports</div>
         <div>
           <div className='card'>subject: {reportage}</div>
-
-          {/* <div>
-            <ul>
-              {reports.reports.map(report => (report = <li> {reportage} </li>))}
-            </ul>
-          </div> */}
+          {reportSubjects}
+          <div>
+            {/* <ul>{reports.map(report => (report = <li> {reportage} </li>))}</ul> */}
+          </div>
         </div>
       </div>
     </Fragment>

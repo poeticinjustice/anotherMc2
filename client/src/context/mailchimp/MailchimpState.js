@@ -19,30 +19,26 @@ const MailchimpState = props => {
 
   const [state, dispatch] = useReducer(MailchimpReducer, initialState);
 
-  // Get Reports
+  // Get All Reports
   const getReports = async () => {
     setLoading(true);
 
-    const res = await axios.get('http://localhost:5000/api/reports');
+    try {
+      const res = await axios.get('http://localhost:5000/api/reports');
 
-    dispatch({
-      type: GET_REPORTS,
-      payload: res.data
-    });
+      dispatch({
+        type: GET_REPORTS,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: REPORTS_ERROR,
+        payload: 'There was an error'
+      });
+    }
   };
 
-  // const getSpecific = async () => {
-  //   setLoading();
-
-  //   const res = await axios.get('http://localhost:5000/api/specific');
-
-  //   dispatch({
-  //     type: GET_SPECIFIC,
-  //     payload: res.data
-  //   });
-  // };
-
-  // get specific
+  // get specific id for testing
   const getSpecific = async () => {
     setLoading();
 
