@@ -3,6 +3,9 @@ import Spinner from '../layout/Spinner';
 import { Link } from 'react-router-dom';
 import MailchimpContext from '../../context/mailchimp/mailchimpContext';
 
+// for testing
+// import axios from 'axios';
+
 const Reports = ({ match }) => {
   const mailchimpContext = useContext(MailchimpContext);
 
@@ -26,17 +29,25 @@ const Reports = ({ match }) => {
     ? reports.reports[0].subject_line
     : 'could not pull subject';
 
-  const reportsForMap = reports.reports
-    ? reports.reports
-    : 'could not pull subject';
+  // TESTING GROUNDS FOR FAILED TESTS :(
+  // async function getReports2() {
+  //   const data = await axios.get('http://localhost:5000/api/reports');
+  //   return data;
+  // }
 
-  const reportSubjects = reportsForMap.map(repSub => repSub.subject_line);
+  //const reportsForMap = reports.reports
+  //? reports.reports
+  //: 'could not pull subject';
+
+  // const reportSubjects = reportsForMap.map(repSub => repSub.subject_line);
+
+  // END TESTING GROUNDS
 
   const totes = specific.clicks
     ? specific.clicks.clicks_total
     : 'could not pull total clicks';
 
-  if (loading) return <Spinner />;
+  if (loading || !reports.reports) return <Spinner />;
   return (
     <Fragment>
       <Link to='/' className='btn btn-light'>
@@ -90,8 +101,7 @@ const Reports = ({ match }) => {
               <li></li>
               <li>
                 <Fragment>
-                  <strong>clicks_total: </strong>
-                  {totes}
+                  <strong>clicks_total: </strong> {totes}
                 </Fragment>
               </li>
             </ul>
@@ -102,10 +112,22 @@ const Reports = ({ match }) => {
         <div>These are the Reports</div>
         <div>
           <div className='card'>subject: {reportage}</div>
-          {reportSubjects}
+          {/* Does not work -- TypeError: Cannot read property '0' of undefined
+           */}
+          {/* <div>{JSON.stringify(getReports2().reports[0].id)}</div> */}
           <div>
-            {/* <ul>{reports.map(report => (report = <li> {reportage} </li>))}</ul> */}
+            {/* Does not work -- TypeError: reportsForMap.map is not a function
+             */}
+            <div>TESTING</div>
+            <ul>
+              <li>
+                {reports.reports.map(report => {
+                  return report.subject_line;
+                })}
+              </li>
+            </ul>
           </div>
+          {<div>{specific.clicks.clicks_total}</div>}
         </div>
       </div>
     </Fragment>

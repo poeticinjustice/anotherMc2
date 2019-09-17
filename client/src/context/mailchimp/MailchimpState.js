@@ -44,7 +44,7 @@ const MailchimpState = props => {
 
     try {
       const res = await axios.get('http://localhost:5000/api/specific');
-
+      console.log(res.data.clicks.clicks_total);
       dispatch({
         type: GET_SPECIFIC,
         payload: res.data
