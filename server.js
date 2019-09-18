@@ -48,9 +48,21 @@ app.get('/api/reports', function(req, res) {
     });
 });
 
+app.get('/api/campaigns', function(req, res) {
+  request
+    .get(`${apiUrl}/campaigns/`)
+    .auth('anystring', apiToken, { type: 'auto' })
+    .end((err, _res) => {
+      if (err) {
+        return console.log(err);
+      }
+      res.send(_res.body);
+    });
+});
+
 app.get('/api/specific', function(req, res) {
   request
-    .get(`${apiUrl}/reports/87b9c68605`)
+    .get(`${apiUrl}/reports/`)
     .auth('anystring', apiToken, { type: 'auto' })
     .end((err, _res) => {
       if (err) {
