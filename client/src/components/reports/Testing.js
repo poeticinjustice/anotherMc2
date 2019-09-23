@@ -15,8 +15,8 @@ const Reports = ({ match }) => {
     getSpecific,
     reports,
     getReports,
-    getCampaign,
-    campaign
+    getCampaigns,
+    campaigns
   } = mailchimpContext;
 
   const { campaign_title, bounces, opens, id } = specific;
@@ -24,17 +24,26 @@ const Reports = ({ match }) => {
   useEffect(() => {
     getSpecific(match.params.specific);
     getReports(match.params.reports);
-    getCampaign();
+    getCampaigns(match.params.campaigns);
     // eslint-disable-next-line
   }, []);
 
-  if (loading || !reports.reports) return <Spinner />;
+  if (loading || !reports.reports || !campaigns.campaigns) return <Spinner />;
+
+  let ids = reports.reports.map(report => {
+    return report.id;
+  });
+
   return (
     <Fragment>
       <Link to='/' className='btn btn-light'>
         Back to Home
       </Link>
-
+      <div className='card'>
+        {ids.map(idx => {
+          return <li>{idx}</li>;
+        })}
+      </div>
       <div className='card'>
         <ul>
           <li>
@@ -69,6 +78,7 @@ const Reports = ({ match }) => {
           </li>
         </ul>
       </div>
+      <div className='card'>{campaigns.campaigns[0].long_archive_url}</div>
       <div className='card'>
         <p>
           <em>destructured</em>

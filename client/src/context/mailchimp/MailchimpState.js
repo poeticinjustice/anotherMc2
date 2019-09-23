@@ -4,7 +4,7 @@ import MailchimpContext from './mailchimpContext';
 import MailchimpReducer from './mailchimpReducer';
 import {
   GET_REPORTS,
-  GET_CAMPAIGN,
+  GET_CAMPAIGNS,
   SET_LOADING,
   REPORTS_ERROR,
   GET_SPECIFIC
@@ -13,8 +13,8 @@ import {
 const MailchimpState = props => {
   const initialState = {
     reports: {},
+    campaigns: {},
     specific: {},
-    campaign: {},
     error: null,
     loading: false
   };
@@ -40,7 +40,25 @@ const MailchimpState = props => {
     }
   };
 
-  // get specific id for testing
+  // Get All Campaigns
+  const getCampaigns = async () => {
+    setLoading();
+
+    try {
+      const res = await axios.get('http://localhost:5000/api/campaigns');
+      dispatch({
+        type: GET_CAMPAIGNS,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: REPORTS_ERROR,
+        payload: 'There was an error'
+      });
+    }
+  };
+
+  // Get Specific ID
   const getSpecific = async () => {
     setLoading();
 
@@ -59,25 +77,6 @@ const MailchimpState = props => {
     }
   };
 
-  // TEST MC SERVER PULLING DIRECTLY WITH AUTH HEADER
-
-  const getCampaign = async () => {
-    setLoading();
-
-    try {
-      const res = await axios.get('http://localhost:5000/api/campaigns');
-      dispatch({
-        type: GET_CAMPAIGN,
-        payload: res.data
-      });
-    } catch (err) {
-      dispatch({
-        type: REPORTS_ERROR,
-        payload: 'There was an error'
-      });
-    }
-  };
-
   // Set Loading
   const setLoading = () => dispatch({ type: SET_LOADING });
 
@@ -85,12 +84,12 @@ const MailchimpState = props => {
     <MailchimpContext.Provider
       value={{
         reports: state.reports,
+        campaigns: state.campaigns,
         specific: state.specific,
-        campaign: state.campaign,
         loading: state.loading,
         error: state.error,
         getReports,
-        getCampaign,
+        getCampaigns,
         getSpecific
       }}
     >

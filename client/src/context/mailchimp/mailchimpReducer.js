@@ -1,6 +1,6 @@
 import {
   GET_REPORTS,
-  GET_CAMPAIGN,
+  GET_CAMPAIGNS,
   SET_LOADING,
   REPORTS_ERROR,
   GET_SPECIFIC
@@ -14,16 +14,16 @@ export default (state, action) => {
         reports: action.payload,
         loading: false
       };
+    case GET_CAMPAIGNS:
+      return {
+        ...state,
+        campaigns: action.payload,
+        loading: false
+      };
     case GET_SPECIFIC:
       return {
         ...state,
         specific: action.payload,
-        loading: false
-      };
-    case GET_CAMPAIGN:
-      return {
-        ...state,
-        campaign: action.payload,
         loading: false
       };
     case REPORTS_ERROR:

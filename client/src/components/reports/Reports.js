@@ -20,6 +20,7 @@ const Reports = () => {
         <caption>The Table</caption>
         <thead>
           <tr>
+            <th>ID</th>
             <th>Campaign Title</th>
             <th>Campaign Subject</th>
             <th>Date/Time</th>
@@ -32,6 +33,7 @@ const Reports = () => {
             const sendDate = new Date(report.send_time);
             return (
               <tr>
+                <td key={`id-{report.id}`}>{report.id}</td>
                 <td key={`title-{report.id}`}>{report.campaign_title}</td>
                 <td key={`subject-{report.id}`}>{report.subject_line}</td>
                 <td key={`sendDate-{report.id}`}>{sendDate.toDateString()}</td>

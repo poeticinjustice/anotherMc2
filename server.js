@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('superagent');
-var cors = require('cors');
+const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
@@ -60,9 +60,33 @@ app.get('/api/campaigns', function(req, res) {
     });
 });
 
+app.get('/api/campaigns/ids', function(req, res) {
+  request
+    .get(`${apiUrl}/campaigns`)
+    .auth('anystring', apiToken, { type: 'auto' })
+    .end((err, _res) => {
+      if (err) {
+        return console.log(err);
+      }
+      res.send(_res.body);
+    });
+});
+
 app.get('/api/specific', function(req, res) {
   request
-    .get(`${apiUrl}/reports/`)
+    .get(`${apiUrl}/reports/042530cdf3`)
+    .auth('anystring', apiToken, { type: 'auto' })
+    .end((err, _res) => {
+      if (err) {
+        return console.log(err);
+      }
+      res.send(_res.body);
+    });
+});
+
+app.get('/api/clicks', function(req, res) {
+  request
+    .get(`${apiUrl}/reports/042530cdf3/click-details`)
     .auth('anystring', apiToken, { type: 'auto' })
     .end((err, _res) => {
       if (err) {
