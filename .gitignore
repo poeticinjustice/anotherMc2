@@ -17,6 +17,8 @@
 .env.development.local
 .env.test.local
 .env.production.local
+/routes/.env
+/config/package.json
 /client/.env
 /client/.env.local
 /client/.env.development.local

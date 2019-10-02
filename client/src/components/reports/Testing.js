@@ -41,7 +41,7 @@ const Reports = ({ match }) => {
       </Link>
       <div className='card'>
         {ids.map(idx => {
-          return <li>{idx}</li>;
+          return <li key={idx}>{idx}</li>;
         })}
       </div>
       <div className='card'>
