@@ -1,103 +1,13 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const request = require('superagent');
-const cors = require('cors');
-
 const app = express();
-app.use(bodyParser.json());
-app.use(cors());
 
-require('dotenv').config();
-
-const apiUrl = process.env.MC_API_URL;
-const apiToken = process.env.MC_ACCESS_TOKEN;
-
-app.get('/', function(req, res) {
-  request
-    .get(`${apiUrl}`)
-    .auth('anystring', apiToken)
-    .end((err, _res) => {
-      if (err) {
-        return console.log(err);
-      }
-      res.send(_res.body);
-    });
-});
-
-app.get('/api', function(req, res) {
-  request
-    .get(`${apiUrl}`)
-    .auth('anystring', apiToken, { type: 'auto' })
-    .end((err, _res) => {
-      if (err) {
-        return console.log(err);
-      }
-      res.send(_res.body);
-    });
-});
-
-app.get('/api/reports', function(req, res) {
-  request
-    .get(`${apiUrl}/reports`)
-    .auth('anystring', apiToken, { type: 'auto' })
-    .end((err, _res) => {
-      if (err) {
-        return console.log(err);
-      }
-      res.send(_res.body);
-    });
-});
-
-app.get('/api/campaigns', function(req, res) {
-  request
-    .get(`${apiUrl}/campaigns/`)
-    .auth('anystring', apiToken, { type: 'auto' })
-    .end((err, _res) => {
-      if (err) {
-        return console.log(err);
-      }
-      res.send(_res.body);
-    });
-});
-
-app.get('/api/campaigns/ids', function(req, res) {
-  request
-    .get(`${apiUrl}/campaigns`)
-    .auth('anystring', apiToken, { type: 'auto' })
-    .end((err, _res) => {
-      if (err) {
-        return console.log(err);
-      }
-      res.send(_res.body);
-    });
-});
-
-app.get('/api/specific', function(req, res) {
-  request
-    .get(`${apiUrl}/reports/042530cdf3`)
-    .auth('anystring', apiToken, { type: 'auto' })
-    .end((err, _res) => {
-      if (err) {
-        return console.log(err);
-      }
-      res.send(_res.body);
-    });
-});
-
-app.get('/api/clicks', function(req, res) {
-  request
-    .get(`${apiUrl}/reports/042530cdf3/click-details`)
-    .auth('anystring', apiToken, { type: 'auto' })
-    .end((err, _res) => {
-      if (err) {
-        return console.log(err);
-      }
-      res.send(_res.body);
-    });
-});
+// Define Routes
+app.use('/', require('./routes/reports'));
+app.use('/', require('./routes/report'));
+app.use('/', require('./routes/other'));
 
 app.get('/test', (req, res) => {
-  res.send(`<h1> Server is running on port ${PORT}</h1>`);
+  res.send(`<h1>Server is running on port ${PORT}</h1>`);
 });
 
 const PORT = process.env.PORT || 5000;

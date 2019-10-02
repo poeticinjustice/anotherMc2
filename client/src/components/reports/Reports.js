@@ -33,12 +33,12 @@ const Reports = () => {
             const sendDate = new Date(report.send_time);
             return (
               <tr>
-                <td key={`id-{report.id}`}>{report.id}</td>
-                <td key={`title-{report.id}`}>{report.campaign_title}</td>
-                <td key={`subject-{report.id}`}>{report.subject_line}</td>
-                <td key={`sendDate-{report.id}`}>{sendDate.toDateString()}</td>
-                <td key={`emailsSent-{report.id}`}>{report.emails_sent}</td>
-                <td key={`clicks-{report.id}`}>{report.clicks.clicks_total}</td>
+                <td>{report.id}</td>
+                <td>{report.campaign_title}</td>
+                <td>{report.subject_line}</td>
+                <td>{sendDate.toDateString()}</td>
+                <td>{report.emails_sent}</td>
+                <td>{report.clicks.clicks_total}</td>
               </tr>
             );
           })}
