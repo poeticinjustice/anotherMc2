@@ -1,96 +1,45 @@
 import React, { Fragment, useEffect, useContext } from 'react';
+import ReportListItem from './ReportListItem';
 import Spinner from '../layout/Spinner';
-import { Link } from 'react-router-dom';
 import MailchimpContext from '../../context/mailchimp/mailchimpContext';
 
-// for testing
-// import axios from 'axios';
-
-const Reports = ({ match }) => {
+const Reports = () => {
   const mailchimpContext = useContext(MailchimpContext);
 
-  const {
-    loading,
-    specific,
-    getSpecific,
-    reports,
-    getReports,
-    getCampaigns,
-    campaigns
-  } = mailchimpContext;
-
-  const { campaign_title, bounces, opens, id } = specific;
+  const { loading, reports, getReports } = mailchimpContext;
 
   useEffect(() => {
-    getSpecific(match.params.specific);
-    getReports(match.params.reports);
-    getCampaigns(match.params.campaigns);
+    getReports();
     // eslint-disable-next-line
   }, []);
 
-  if (loading || !reports.reports || !campaigns.campaigns) return <Spinner />;
-
-  let ids = reports.reports.map(report => {
-    return report.id;
-  });
-
-  return (
-    <Fragment>
-      <Link to='/' className='btn btn-light'>
-        Back to Home
-      </Link>
-      <div className='card'>
-        {ids.map(idx => {
-          return <li key={idx}>{idx}</li>;
-        })}
-      </div>
-      <div className='card'>
-        <ul>
-          <li>
-            {campaign_title && (
-              <Fragment>
-                <strong>hard_bounces: </strong> {campaign_title}
-              </Fragment>
-            )}
-          </li>
-
-          <li>
-            {opens && (
-              <Fragment>
-                <strong>opens_total: </strong> {opens.opens_total}
-              </Fragment>
-            )}
-          </li>
-
-          <li>
-            {bounces && (
-              <Fragment>
-                <strong>hard_bounces: </strong> {bounces.hard_bounces}
-              </Fragment>
-            )}
-          </li>
-
-          <li>
-            <br />
-            <strong>Clicks stringified: </strong>
-            <p>{JSON.stringify(specific.clicks)}</p>
-            <strong>END Clicks stringified: </strong>
-          </li>
-        </ul>
-      </div>
-      <div className='card'>{campaigns.campaigns[0].long_archive_url}</div>
-      <div className='card'>
-        <p>
-          <em>destructured</em>
-          <br /> {id}
-        </p>
-        <p>
-          <em>specific.subject_line</em>
-          <br /> {specific.subject_line}
-        </p>
-      </div>
-    </Fragment>
-  );
+  if (loading || !reports.reports) {
+    return <Spinner />;
+  } else {
+    return (
+      <Fragment>
+        <table>
+          <caption></caption>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Campaign Title</th>
+              <th>Campaign Subject</th>
+              <th>Date and Time Sent</th>
+              <th>Total Sent</th>
+              <th>Total Clicks</th>
+              <th>Get Report</th>
+            </tr>
+          </thead>
+          <tbody>
+            {reports.reports.map(report => (
+              <ReportListItem key={report.id} report={report} />
+            ))}
+          </tbody>
+        </table>
+      </Fragment>
+    );
+  }
 };
 
 export default Reports;
