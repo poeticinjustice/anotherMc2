@@ -4,17 +4,19 @@ import MailchimpContext from './mailchimpContext';
 import MailchimpReducer from './mailchimpReducer';
 import {
   GET_REPORTS,
+  GET_REPORT,
   GET_CAMPAIGNS,
+  GET_CAMPAIGN,
   SET_LOADING,
-  REPORTS_ERROR,
-  GET_SPECIFIC
+  REPORTS_ERROR
 } from '../types';
 
 const MailchimpState = props => {
   const initialState = {
     reports: {},
     campaigns: {},
-    specific: {},
+    report: {},
+    campaign: {},
     error: null,
     loading: false
   };
@@ -58,15 +60,34 @@ const MailchimpState = props => {
     }
   };
 
-  // Get Specific ID
-  const getSpecific = async () => {
+  // Get Report (specific) ID
+  const getReport = async id => {
     setLoading();
 
     try {
-      const res = await axios.get('http://localhost:5000/api/specific');
+      const res = await axios.get(`http://localhost:5000/api/report/${id}`);
 
       dispatch({
-        type: GET_SPECIFIC,
+        type: GET_REPORT,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: REPORTS_ERROR,
+        payload: 'There was an error'
+      });
+    }
+  };
+
+  // Get Campaign (specific) ID
+  const getCampaign = async id => {
+    setLoading();
+
+    try {
+      const res = await axios.get(`http://localhost:5000/api/campaign/${id}`);
+
+      dispatch({
+        type: GET_CAMPAIGN,
         payload: res.data
       });
     } catch (err) {
@@ -85,12 +106,14 @@ const MailchimpState = props => {
       value={{
         reports: state.reports,
         campaigns: state.campaigns,
-        specific: state.specific,
+        report: state.report,
+        campaign: state.campaign,
         loading: state.loading,
         error: state.error,
         getReports,
         getCampaigns,
-        getSpecific
+        getReport,
+        getCampaign
       }}
     >
       {props.children}

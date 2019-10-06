@@ -4,6 +4,7 @@ import Navbar from './components/layout/Navbar';
 import Testing from './components/reports/Testing';
 import Alert from './components/layout/Alert';
 import Home from './components/pages/Home';
+import Report from './components/reports/Report';
 import About from './components/pages/About';
 import NotFound from './components/pages/NotFound';
 
@@ -22,6 +23,7 @@ const App = () => {
               <Alert />
               <Switch>
                 <Route exact path='/' component={Home} />
+                <Route exact path='/report/:id' component={Report} />
                 <Route exact path='/about' component={About} />
                 <Route exact path='/testing' component={Testing} />
                 <Route component={NotFound} />
