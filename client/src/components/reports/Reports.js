@@ -22,7 +22,6 @@ const Reports = () => {
           <caption></caption>
           <thead>
             <tr>
-              <th>ID</th>
               <th>Campaign Title</th>
               <th>Campaign Subject</th>
               <th>Date and Time Sent</th>
