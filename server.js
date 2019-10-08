@@ -5,9 +5,6 @@ const app = express();
 app.use('/', require('./routes/reports'));
 app.use('/', require('./routes/report'));
 
-// Testing Static Routes
-app.use('/', require('./routes/static'));
-
 app.get('/test', (req, res) => {
   res.send(`<h1>Server is running on port ${PORT}</h1>`);
 });

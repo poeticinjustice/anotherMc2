@@ -1,6 +1,5 @@
 import {
   GET_REPORTS,
-  GET_CAMPAIGNS,
   GET_REPORT,
   GET_CAMPAIGN,
   SET_LOADING,
@@ -13,12 +12,6 @@ export default (state, action) => {
       return {
         ...state,
         reports: action.payload,
-        loading: false
-      };
-    case GET_CAMPAIGNS:
-      return {
-        ...state,
-        campaigns: action.payload,
         loading: false
       };
     case GET_REPORT:
