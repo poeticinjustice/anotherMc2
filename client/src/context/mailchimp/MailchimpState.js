@@ -5,7 +5,6 @@ import MailchimpReducer from './mailchimpReducer';
 import {
   GET_REPORTS,
   GET_REPORT,
-  GET_CAMPAIGNS,
   GET_CAMPAIGN,
   SET_LOADING,
   REPORTS_ERROR
@@ -32,24 +31,6 @@ const MailchimpState = props => {
 
       dispatch({
         type: GET_REPORTS,
-        payload: res.data
-      });
-    } catch (err) {
-      dispatch({
-        type: REPORTS_ERROR,
-        payload: 'There was an error'
-      });
-    }
-  };
-
-  // Get All Campaigns
-  const getCampaigns = async () => {
-    setLoading();
-
-    try {
-      const res = await axios.get('http://localhost:5000/api/campaigns');
-      dispatch({
-        type: GET_CAMPAIGNS,
         payload: res.data
       });
     } catch (err) {
@@ -105,13 +86,11 @@ const MailchimpState = props => {
     <MailchimpContext.Provider
       value={{
         reports: state.reports,
-        campaigns: state.campaigns,
         report: state.report,
         campaign: state.campaign,
         loading: state.loading,
         error: state.error,
         getReports,
-        getCampaigns,
         getReport,
         getCampaign
       }}

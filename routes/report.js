@@ -11,8 +11,28 @@ require('dotenv').config();
 const apiUrl = process.env.MC_API_URL;
 const apiToken = process.env.MC_ACCESS_TOKEN;
 
-router.get('/test_rep', (req, res) => {
-  res.send(`<h1>Single Report</h1>`);
+router.get(`/api/report/:id`, function(req, res) {
+  request
+    .get(`${apiUrl}/reports/${req.params.id}`)
+    .auth('anystring', apiToken, { type: 'auto' })
+    .end((err, _res) => {
+      if (err) {
+        return console.log(`${apiUrl}/reports/${req.params.id}`);
+      }
+      res.send(_res.body);
+    });
+});
+
+router.get(`/api/campaign/:id`, function(req, res) {
+  request
+    .get(`${apiUrl}/campaigns/${req.params.id}`)
+    .auth('anystring', apiToken, { type: 'auto' })
+    .end((err, _res) => {
+      if (err) {
+        return console.log(`${apiUrl}/reports/${req.params.id}`);
+      }
+      res.send(_res.body);
+    });
 });
 
 module.exports = router;

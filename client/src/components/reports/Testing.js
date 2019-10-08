@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useContext } from 'react';
-import ReportListItem from './ReportListItem';
+import ReportListItem from './TestReportListItem';
 import Spinner from '../layout/Spinner';
 import MailchimpContext from '../../context/mailchimp/mailchimpContext';
 
@@ -18,6 +18,7 @@ const Reports = () => {
   } else {
     return (
       <Fragment>
+        {console.log('loaded header')}
         <table>
           <caption></caption>
           <thead>
@@ -25,9 +26,6 @@ const Reports = () => {
               <th>ID</th>
               <th>Campaign Title</th>
               <th>Campaign Subject</th>
-              <th>Date and Time Sent</th>
-              <th>Total Sent</th>
-              <th>Total Clicks</th>
               <th>Get Report</th>
             </tr>
           </thead>

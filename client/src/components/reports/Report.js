@@ -43,6 +43,8 @@ const Report = ({ match }) => {
           Link to campaign
         </a>
       </div>
+      <br />
+      <br />
       <div>
         {subject_line} | {sendDate}
       </div>
