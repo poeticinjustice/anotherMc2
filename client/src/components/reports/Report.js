@@ -19,7 +19,7 @@ const Report = ({ match }) => {
     // eslint-disable-next-line
   }, []);
 
-  const { id, subject_line, emails_sent, send_time } = report;
+  const { subject_line, emails_sent, send_time } = report;
   const { archive_url } = campaign;
 
   if (loading || !report.clicks) return <Spinner />;
@@ -37,7 +37,6 @@ const Report = ({ match }) => {
       </Link>
       <br />
       <br />
-      <div>ID: {id}</div>
       <div>
         <a href={archive_url} target='_blank' rel='noopener noreferrer'>
           Link to campaign

@@ -10,7 +10,6 @@ const ReportListItem = ({
   return (
     <Fragment>
       <tr>
-        <td>{id}</td>
         <td>{campaign_title}</td>
         <td>{subject_line}</td>
         <td>
