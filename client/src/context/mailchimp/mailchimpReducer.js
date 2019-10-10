@@ -2,6 +2,7 @@ import {
   GET_REPORTS,
   GET_REPORT,
   GET_CAMPAIGN,
+  GET_CLICKED,
   SET_LOADING,
   REPORTS_ERROR
 } from '../types';
@@ -24,6 +25,12 @@ export default (state, action) => {
       return {
         ...state,
         campaign: action.payload,
+        loading: false
+      };
+    case GET_CLICKED:
+      return {
+        ...state,
+        urlsClicked: action.payload,
         loading: false
       };
     case REPORTS_ERROR:
