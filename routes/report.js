@@ -29,7 +29,19 @@ router.get(`/api/campaign/:id`, function(req, res) {
     .auth('anystring', apiToken, { type: 'auto' })
     .end((err, _res) => {
       if (err) {
-        return console.log(`${apiUrl}/reports/${req.params.id}`);
+        return console.log(`${apiUrl}/campaigns/${req.params.id}`);
+      }
+      res.send(_res.body);
+    });
+});
+
+router.get(`/api/clicked/:id`, function(req, res) {
+  request
+    .get(`${apiUrl}/reports/${req.params.id}/click-details`)
+    .auth('anystring', apiToken, { type: 'auto' })
+    .end((err, _res) => {
+      if (err) {
+        return console.log(`${apiUrl}/reports/${req.params.id}/click-details`);
       }
       res.send(_res.body);
     });

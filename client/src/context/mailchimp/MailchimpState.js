@@ -6,6 +6,7 @@ import {
   GET_REPORTS,
   GET_REPORT,
   GET_CAMPAIGN,
+  GET_CLICKED,
   SET_LOADING,
   REPORTS_ERROR
 } from '../types';
@@ -16,6 +17,7 @@ const MailchimpState = props => {
     campaigns: {},
     report: {},
     campaign: {},
+    urlsClicked: {},
     error: null,
     loading: false
   };
@@ -55,7 +57,7 @@ const MailchimpState = props => {
     } catch (err) {
       dispatch({
         type: REPORTS_ERROR,
-        payload: 'There was an error'
+        payload: 'There was a report error'
       });
     }
   };
@@ -74,7 +76,25 @@ const MailchimpState = props => {
     } catch (err) {
       dispatch({
         type: REPORTS_ERROR,
-        payload: 'There was an error'
+        payload: 'There was a campaign error'
+      });
+    }
+  };
+
+  const getUrlsClicked = async id => {
+    setLoading();
+
+    try {
+      const res = await axios.get(`http://localhost:5000/api/clicked/${id}`);
+
+      dispatch({
+        type: GET_CLICKED,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: REPORTS_ERROR,
+        payload: 'There was a clicked error'
       });
     }
   };
@@ -88,11 +108,13 @@ const MailchimpState = props => {
         reports: state.reports,
         report: state.report,
         campaign: state.campaign,
+        urlsClicked: state.urlsClicked,
         loading: state.loading,
         error: state.error,
         getReports,
         getReport,
-        getCampaign
+        getCampaign,
+        getUrlsClicked
       }}
     >
       {props.children}

@@ -18,7 +18,6 @@ const ReportListItem = ({
         <td>{emails_sent}</td>
         <td>{clicks.clicks_total}</td>
         <td>
-          {/* ??When I click here, how can I change id variable in routes/report.js to ${id} below??  */}
           <Link to={`/report/${id}`} className='btn btn-dark btn-sm my-1'>
             Get Report
           </Link>

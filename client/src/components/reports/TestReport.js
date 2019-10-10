@@ -3,7 +3,7 @@ import Spinner from '../layout/Spinner';
 import { Link } from 'react-router-dom';
 import MailchimpContext from '../../context/mailchimp/mailchimpContext';
 
-const Report = ({ match }) => {
+const TestReport = ({ match }) => {
   const mailchimpContext = useContext(MailchimpContext);
   const {
     getReport,
@@ -65,8 +65,8 @@ const Report = ({ match }) => {
 
   return (
     <Fragment>
-      <Link to='/' className='btn btn-light'>
-        Back to Report List
+      <Link to='/test' className='btn btn-light'>
+        Back to Report Test List
       </Link>
       <br />
       <br />
@@ -132,4 +132,4 @@ const Report = ({ match }) => {
   );
 };
 
-export default Report;
+export default TestReport;

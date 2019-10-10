@@ -5,7 +5,7 @@ const app = express();
 app.use('/', require('./routes/reports'));
 app.use('/', require('./routes/report'));
 
-app.get('/test', (req, res) => {
+app.get('/tester', (req, res) => {
   res.send(`<h1>Server is running on port ${PORT}</h1>`);
 });
 

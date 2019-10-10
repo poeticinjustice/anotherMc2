@@ -6,7 +6,7 @@ const About = () => {
       <h1>About this app</h1>
       <p className='my-1'>Get yer MailChimp stats</p>
       <p className='bg-dark p'>
-        <strong>Version 0.2</strong>
+        <strong>Version 0.4</strong>
       </p>
     </div>
   );

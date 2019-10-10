@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useContext } from 'react';
-import ReportListItem from './TestReportListItem';
+import TestReportListItem from './TestReportListItem';
 import Spinner from '../layout/Spinner';
 import MailchimpContext from '../../context/mailchimp/mailchimpContext';
 
-const Reports = () => {
+const TestReports = () => {
   const mailchimpContext = useContext(MailchimpContext);
 
   const { loading, reports, getReports } = mailchimpContext;
@@ -18,7 +18,6 @@ const Reports = () => {
   } else {
     return (
       <Fragment>
-        {console.log('loaded header')}
         <table>
           <caption></caption>
           <thead>
@@ -31,7 +30,7 @@ const Reports = () => {
           </thead>
           <tbody>
             {reports.reports.map(report => (
-              <ReportListItem key={report.id} report={report} />
+              <TestReportListItem key={report.id} report={report} />
             ))}
           </tbody>
         </table>
@@ -40,4 +39,4 @@ const Reports = () => {
   }
 };
 
-export default Reports;
+export default TestReports;
