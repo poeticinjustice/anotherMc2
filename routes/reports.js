@@ -13,7 +13,7 @@ const apiToken = process.env.MC_ACCESS_TOKEN;
 
 router.get('/api/reports', function(req, res) {
   request
-    .get(`${apiUrl}/reports`)
+    .get(`${apiUrl}/reports?offset=0&count=100`)
     .auth('anystring', apiToken, { type: 'auto' })
     .end((err, _res) => {
       if (err) {
