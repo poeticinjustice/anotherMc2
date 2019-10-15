@@ -100,7 +100,8 @@ const Report = ({ match }) => {
       <br />
       <br />
       <div>
-        {subject_line} | {sendDate}
+        {subject_line}: Lighting&amp;Sound America Marketing Campaign;{' '}
+        {sendDate}
       </div>
       <table>
         <tbody>
