@@ -29,7 +29,9 @@ const MailchimpState = props => {
     setLoading(true);
 
     try {
-      const res = await axios.get('http://localhost:5000/api/reports');
+      const res = await axios.get(
+        'https://mailtrack2019.herokuapp.com/api/reports'
+      );
 
       dispatch({
         type: GET_REPORTS,
@@ -48,7 +50,9 @@ const MailchimpState = props => {
     setLoading();
 
     try {
-      const res = await axios.get(`http://localhost:5000/api/report/${id}`);
+      const res = await axios.get(
+        `https://mailtrack2019.herokuapp.com/api/report/${id}`
+      );
 
       dispatch({
         type: GET_REPORT,
@@ -67,7 +71,9 @@ const MailchimpState = props => {
     setLoading();
 
     try {
-      const res = await axios.get(`http://localhost:5000/api/campaign/${id}`);
+      const res = await axios.get(
+        `https://mailtrack2019.herokuapp.com/api/campaign/${id}`
+      );
 
       dispatch({
         type: GET_CAMPAIGN,
@@ -85,7 +91,9 @@ const MailchimpState = props => {
     setLoading();
 
     try {
-      const res = await axios.get(`http://localhost:5000/api/clicked/${id}`);
+      const res = await axios.get(
+        `https://mailtrack2019.herokuapp.com/api/clicked/${id}`
+      );
 
       dispatch({
         type: GET_CLICKED,
