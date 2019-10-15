@@ -1,13 +1,20 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 
 // Define Routes
 app.use('/', require('./routes/reports'));
 app.use('/', require('./routes/report'));
 
-app.get('/tester', (req, res) => {
-  res.send(`<h1>Server is running on port ${PORT}</h1>`);
-});
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  );
+}
 
 const PORT = process.env.PORT || 5000;
 
