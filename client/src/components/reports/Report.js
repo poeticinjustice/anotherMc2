@@ -57,7 +57,8 @@ const Report = ({ match }) => {
           {urlClicked.url}
         </a>
       </td>
-      <td>{urlClicked.total_clicks}</td>
+      <td>{urlClicked.total_clicks}</td>{' '}
+      <td>{((urlClicked.total_clicks / clicks_total) * 100).toFixed(2)}%</td>
     </tr>
   ));
 
@@ -124,6 +125,7 @@ const Report = ({ match }) => {
           <tr>
             <th>URL</th>
             <th>Total Clicks</th>
+            <th>Percent</th>
           </tr>
         </thead>
         <tbody>{urls}</tbody>
