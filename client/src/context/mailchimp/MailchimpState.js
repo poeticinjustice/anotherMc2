@@ -24,12 +24,18 @@ const MailchimpState = props => {
 
   const [state, dispatch] = useReducer(MailchimpReducer, initialState);
 
+  // Set Prod state vs Dev
+  const prodApi = 'https://mailtrack2019.herokuapp.com/api';
+  const devApi = 'http://localhost:5000/api';
+
+  const apiLink = process.env.NODE_ENV === 'production' ? prodApi : devApi;
+
   // Get All Reports
   const getReports = async () => {
     setLoading(true);
 
     try {
-      const res = await axios.get('http://localhost:5000/api/reports');
+      const res = await axios.get(`${apiLink}/reports`);
 
       dispatch({
         type: GET_REPORTS,
@@ -48,7 +54,7 @@ const MailchimpState = props => {
     setLoading();
 
     try {
-      const res = await axios.get(`http://localhost:5000/api/report/${id}`);
+      const res = await axios.get(`${apiLink}/report/${id}`);
 
       dispatch({
         type: GET_REPORT,
@@ -67,7 +73,7 @@ const MailchimpState = props => {
     setLoading();
 
     try {
-      const res = await axios.get(`http://localhost:5000/api/campaign/${id}`);
+      const res = await axios.get(`${apiLink}/campaign/${id}`);
 
       dispatch({
         type: GET_CAMPAIGN,
@@ -85,7 +91,7 @@ const MailchimpState = props => {
     setLoading();
 
     try {
-      const res = await axios.get(`http://localhost:5000/api/clicked/${id}`);
+      const res = await axios.get(`${apiLink}/clicked/${id}`);
 
       dispatch({
         type: GET_CLICKED,
