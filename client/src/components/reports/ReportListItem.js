@@ -15,7 +15,7 @@ const ReportListItem = ({
         <td>
           {sendDate} at {sendTime}
         </td>
-        <td>{emails_sent}</td>
+        <td>{emails_sent.toLocaleString()}</td>
         <td>{clicks.clicks_total}</td>
         <td>
           <Link to={`/report/${id}`} className='btn btn-dark btn-sm my-1'>
