@@ -57,12 +57,21 @@ const Report = ({ match }) => {
           {urlClicked.url}
         </a>
       </td>
-      <td>{urlClicked.total_clicks}</td>{' '}
+      <td>{urlClicked.total_clicks}</td>
       <td>{((urlClicked.total_clicks / clicks_total) * 100).toFixed(0)}%</td>
     </tr>
   ));
 
-  const sendDate = new Date(send_time).toDateString();
+  const sendDate = new Date(send_time);
+  const dateOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  };
+
+  const formattedDate = new Intl.DateTimeFormat('en-US', dateOptions).format(
+    sendDate
+  );
 
   return (
     <Fragment>
@@ -74,10 +83,10 @@ const Report = ({ match }) => {
       <table>
         <tbody>
           <tr>
-            <td>{emails_sent}</td>
-            <td>{clicks_total}</td>
+            <td>{emails_sent.toLocaleString()}</td>
+            <td>{clicks_total.toLocaleString()}</td>
             <td>{click_percent}%</td>
-            <td>{unique_opens}</td>
+            <td>{unique_opens.toLocaleString()}</td>
             <td>{open_percent}%</td>
           </tr>
         </tbody>
@@ -101,22 +110,22 @@ const Report = ({ match }) => {
       <br />
       <div>
         {subject_line}: Lighting&amp;Sound America Marketing Campaign;{' '}
-        {sendDate}
+        {formattedDate}
       </div>
       <table>
         <tbody>
           <tr>
             <td>Sent:</td>
-            <td>{emails_sent}</td>
+            <td>{emails_sent.toLocaleString()}</td>
           </tr>
           <tr>
             <td>Clicks:</td>
-            <td>{clicks_total}</td>
+            <td>{clicks_total.toLocaleString()}</td>
             <td>{click_percent}%</td>
           </tr>
           <tr>
             <td>Opens:</td>
-            <td>{unique_opens}</td>
+            <td>{unique_opens.toLocaleString()}</td>
             <td>{open_percent}%</td>
           </tr>
         </tbody>
