@@ -1,11 +1,20 @@
 const express = require('express');
+const connectDB = require('./config/db');
 const path = require('path');
 
 const app = express();
 
+// Connect Database
+connectDB();
+
+// init middlware
+app.use(express.json({ extended: false }));
+
 // Define Routes
-app.use('/', require('./routes/reports'));
-app.use('/', require('./routes/report'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api', require('./routes/reports'));
+app.use('/api', require('./routes/report'));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
