@@ -11,7 +11,7 @@ require('dotenv').config();
 const apiUrl = process.env.MC_API_URL;
 const apiToken = process.env.MC_ACCESS_TOKEN;
 
-router.get(`/api/report/:id`, function(req, res) {
+router.get(`/report/:id`, function(req, res) {
   request
     .get(`${apiUrl}/reports/${req.params.id}`)
     .auth('anystring', apiToken, { type: 'auto' })
@@ -23,7 +23,7 @@ router.get(`/api/report/:id`, function(req, res) {
     });
 });
 
-router.get(`/api/campaign/:id`, function(req, res) {
+router.get(`/campaign/:id`, function(req, res) {
   request
     .get(`${apiUrl}/campaigns/${req.params.id}`)
     .auth('anystring', apiToken, { type: 'auto' })
@@ -35,7 +35,7 @@ router.get(`/api/campaign/:id`, function(req, res) {
     });
 });
 
-router.get(`/api/clicked/:id`, function(req, res) {
+router.get(`/clicked/:id`, function(req, res) {
   request
     .get(`${apiUrl}/reports/${req.params.id}/click-details?offset=0&count=1000`)
     .auth('anystring', apiToken, { type: 'auto' })
