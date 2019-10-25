@@ -25,6 +25,66 @@ const Report = ({ match }) => {
   const { subject_line, emails_sent, send_time, unsubscribed } = report;
   const { archive_url, web_id } = campaign;
 
+  const tdStyle1 = {
+    width: 760,
+    height: 48,
+    fontFamily: 'Trebuchet MS',
+    color: '#1F497D',
+    paddingLeft: 4
+  };
+
+  const tdStyle2 = {
+    width: 120,
+    height: 36,
+    fontFamily: 'Trebuchet MS',
+    color: '#1F497D',
+    paddingLeft: 8,
+    verticalAlign: 'bottom'
+  };
+
+  const tdStyle3 = {
+    width: 640,
+    height: 48,
+    borderTop: 'solid #DEDDDC 1.0pt',
+    borderBottom: 'solid #DEDDDC 1.0pt',
+    fontFamily: 'Trebuchet MS',
+    background: '#F6F6F4',
+    paddingLeft: 8,
+    fontSize: '100%'
+  };
+
+  const tdStyle4 = {
+    width: 120,
+    height: 48,
+    borderTop: 'solid #DEDDDC 1.0pt',
+    borderBottom: 'solid #DEDDDC 1.0pt',
+    fontFamily: 'Trebuchet MS',
+    background: '#F6F6F4',
+    paddingLeft: 8,
+    fontSize: '100%'
+  };
+
+  const tdStyle5 = {
+    width: 640,
+    height: 36,
+    overflow: 'hidden',
+    borderBottom: 'dotted #DEDDDC 1.0pt',
+    fontFamily: 'Trebuchet MS',
+    paddingLeft: 8,
+    fontSize: '100%',
+    maxWidth: 640
+  };
+
+  const tdStyle6 = {
+    width: 120,
+    height: 36,
+    align: 'right',
+    borderBottom: 'dotted #DEDDDC 1.0pt',
+    fontFamily: 'Trebuchet MS',
+    paddingRight: 8,
+    fontSize: '100%'
+  };
+
   if (loading || (!report.clicks || !urlsClicked.urls_clicked))
     return <Spinner />;
 
@@ -52,13 +112,16 @@ const Report = ({ match }) => {
 
   let urls = combined.map(urlClicked => (
     <tr key={urlClicked.url}>
-      <td>
+      <td style={tdStyle5}>
         <a href={urlClicked.url} target='_blank' rel='noopener noreferrer'>
           {urlClicked.url}
         </a>
       </td>
-      <td>{urlClicked.total_clicks}</td>
-      <td>{((urlClicked.total_clicks / clicks_total) * 100).toFixed(0)}%</td>
+      <td style={tdStyle6}>
+        {urlClicked.total_clicks} (
+        {((urlClicked.total_clicks / clicks_total) * 100).toFixed(0)}%)
+      </td>
+      <td></td>
     </tr>
   ));
 
@@ -108,34 +171,40 @@ const Report = ({ match }) => {
       </div>
       <br />
       <br />
-      <div>
-        {subject_line}: Lighting&amp;Sound America Marketing Campaign;{' '}
-        {formattedDate}
-      </div>
+      <table>
+        <tr>
+          <td style={tdStyle1}>
+            {subject_line}: Lighting&amp;Sound America Marketing Campaign;{' '}
+            {formattedDate}
+          </td>
+        </tr>
+      </table>
       <table>
         <tbody>
           <tr>
-            <td>Sent:</td>
-            <td>{emails_sent.toLocaleString()}</td>
+            <td style={tdStyle2}>Total Sent:</td>
+            <td style={tdStyle2}>{emails_sent.toLocaleString()}</td>
           </tr>
           <tr>
-            <td>Clicks:</td>
-            <td>{clicks_total.toLocaleString()}</td>
-            <td>{click_percent}%</td>
+            <td style={tdStyle2}>Opened:</td>
+            <td style={tdStyle2}>{unique_opens.toLocaleString()}</td>
+            <td style={tdStyle2}>{open_percent}%</td>
           </tr>
           <tr>
-            <td>Opens:</td>
-            <td>{unique_opens.toLocaleString()}</td>
-            <td>{open_percent}%</td>
+            <td style={tdStyle2}>Total Clicks:</td>
+            <td style={tdStyle2}>{clicks_total.toLocaleString()}</td>
+            <td style={tdStyle2}>{click_percent}%</td>
+          </tr>
+          <tr>
+            <td style={tdStyle2}>Clickthroughs:</td>
           </tr>
         </tbody>
       </table>
       <table>
         <thead>
           <tr>
-            <th>URL</th>
-            <th>Total Clicks</th>
-            <th>Percent</th>
+            <td style={tdStyle3}>URL</td>
+            <th style={tdStyle4}>Total Clicks</th>
           </tr>
         </thead>
         <tbody>{urls}</tbody>

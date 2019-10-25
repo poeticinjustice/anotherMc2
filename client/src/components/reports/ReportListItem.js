@@ -7,6 +7,7 @@ const ReportListItem = ({
 }) => {
   const sendDate = new Date(send_time).toDateString();
   const sendTime = new Date(send_time).toLocaleTimeString('EDT');
+
   return (
     <Fragment>
       <tr>
