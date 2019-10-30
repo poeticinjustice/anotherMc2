@@ -25,7 +25,7 @@ const MailchimpState = props => {
   const [state, dispatch] = useReducer(MailchimpReducer, initialState);
 
   // Set Prod state vs Dev
-  const prodApi = 'https://mailtrack2019.herokuapp.com/api';
+  const prodApi = process.env.MC_PROD_API;
   const devApi = 'http://localhost:5000/api';
 
   const apiLink = process.env.NODE_ENV === 'production' ? prodApi : devApi;
