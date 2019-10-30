@@ -26,7 +26,7 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
-  title: 'MailChamp'
+  title: 'MailChamp2'
 };
 
 export default Navbar;
