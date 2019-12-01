@@ -60,8 +60,9 @@ const Report = ({ match }) => {
     borderBottom: 'solid #DEDDDC 1.0pt',
     fontFamily: 'Trebuchet MS',
     background: '#F6F6F4',
-    paddingLeft: 8,
-    fontSize: '100%'
+    paddingRight: 8,
+    fontSize: '100%',
+    textAlign: 'right'
   };
 
   const tdStyle5 = {
@@ -78,19 +79,19 @@ const Report = ({ match }) => {
   const tdStyle6 = {
     width: 120,
     height: 36,
-    align: 'right',
+    textAlign: 'right',
     borderBottom: 'dotted #DEDDDC 1.0pt',
     fontFamily: 'Trebuchet MS',
     paddingRight: 8,
     fontSize: '100%'
   };
 
-  if (loading || (!report.clicks || !urlsClicked.urls_clicked))
+  if (loading || !report.clicks || !urlsClicked.urls_clicked)
     return <Spinner />;
 
   let clicks_total = report.clicks.clicks_total;
-  let click_percent = ((clicks_total / emails_sent) * 100).toFixed(2);
   let unique_opens = report.opens.unique_opens;
+  let click_percent = ((clicks_total / unique_opens) * 100).toFixed(2);
   let open_percent = ((unique_opens / emails_sent) * 100).toFixed(2);
   let reportLink = `https://us19.admin.mailchimp.com/reports/summary?id=${web_id}`;
   let unsubscribedLink = `https://us19.admin.mailchimp.com/reports/activity/unsubscribed?id=${web_id}`;
@@ -147,10 +148,10 @@ const Report = ({ match }) => {
         <tbody>
           <tr>
             <td>{emails_sent.toLocaleString()}</td>
-            <td>{clicks_total.toLocaleString()}</td>
-            <td>{click_percent}%</td>
             <td>{unique_opens.toLocaleString()}</td>
             <td>{open_percent}%</td>
+            <td>{clicks_total.toLocaleString()}</td>
+            <td>{click_percent}%</td>
           </tr>
         </tbody>
       </table>
