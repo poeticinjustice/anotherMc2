@@ -10,10 +10,11 @@ require('dotenv').config();
 
 const apiUrl = process.env.MC_API_URL;
 const apiToken = process.env.MC_ACCESS_TOKEN;
+const link = `${apiUrl}/reports?offset=0&count=100`;
 
 router.get('/reports', function(req, res) {
   request
-    .get(`${apiUrl}/reports?offset=0&count=100`)
+    .get(link)
     .auth('anystring', apiToken, { type: 'auto' })
     .end((err, _res) => {
       if (err) {
