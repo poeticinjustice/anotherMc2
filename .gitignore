@@ -18,7 +18,6 @@
 .env.test.local
 .env.production.local
 /config/package.json
-/config/default.json
 
 npm-debug.log*
 yarn-debug.log*
