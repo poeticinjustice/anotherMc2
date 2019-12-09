@@ -37,7 +37,7 @@ router.get(`/campaign/:id`, function(req, res) {
 
 router.get(`/clicked/:id`, function(req, res) {
   request
-    .get(`${apiUrl}/reports/${req.params.id}/click-details?offset=0&count=200`)
+    .get(`${apiUrl}/reports/${req.params.id}/click-details?offset=0&count=100`)
     .auth('anystring', apiToken, { type: 'auto' })
     .end((err, _res) => {
       if (err) {
